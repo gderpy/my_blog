@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "my blog"
+version = "0.1.0"
+description = "pet-project 1"
+authors = ["yury petrov"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^5.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
