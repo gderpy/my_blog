@@ -7,11 +7,18 @@ from django.urls import reverse
 # Create your views here.
 
 def index(request):
-    return render(request, "main/index.html")
+    data = {
+        "title": "Главная страница",
+    }
+    return render(request, "main/index.html", context=data)
 
 
 def about(request):
     return render(request, "main/about.html")
+
+
+def registration(request):
+    return render(request, "main/registration.html")
 
 
 def page_not_found(request, exception):
