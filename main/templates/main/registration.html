@@ -1,0 +1,74 @@
+{% extends "base_2.html" %}
+
+{% block content %}
+
+<div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="rectangle offset-up">
+        <div class="inner-box container">
+            <div class="row d-flex align-items-center">
+                <div class="registration-title col-12">
+                    <h2>Регистрация</h2>
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-3">
+                <div class="col-auto">
+                    <label for="specificSizeInputName" class="form-label">Имя</label>
+                    <input type="text" class="form-control" placeholder="Юрий" aria-label="Имя">
+                </div>
+                <div class="col-auto">
+                    <label for="specificSizeInputSurname" class="form-label">Фамилия</label>
+                    <input type="text" class="form-control" placeholder="Гагарин" aria-label="Фамилия">
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-3">
+                <div class="col-auto">
+                    <label for="birthDate" class="form-label">Дата рождения</label>
+                    <input type="date" class="form-control" placeholder="Юрий" aria-label="Дата рождения" style="width: 274px;">
+                </div>
+                <div class="col-auto">
+                    <label for="gender" class="form-label d-block">Пол</label>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="male" value="male">
+                        <label for="male" class="form-check-label">Мужской</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" id="female" value="female">
+                        <label for="female" class="form-check-label">Женский</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-3">
+                <div class="col-auto">
+                    <label for="inputEmail4" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="example@yandex.ru">
+                </div>
+                <div class="col-auto">
+                    <label for="inputNickname" class="form-label">Никнейм</label>
+                    <input type="text" class="form-control" id="inputNickname" placeholder="NickName" aria-label="Никнейм">
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-3">
+                <div class="col-auto">
+                    <label for="inputPassword" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Придумайте пароль" required>
+                </div>
+                <div class="col-auto">
+                    <label for="confirmPassword" class="form-label">Повторите пароль</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Повторите пароль" required>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <button class="btn text-bg-dark" type="submit">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
