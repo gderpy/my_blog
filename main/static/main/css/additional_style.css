@@ -1,20 +1,48 @@
-.rectangle {
-    width: 700px;
-    height: 550px;
-    border: 3px solid black;
-    border-radius: 15px;
+.section-title {
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 600;
 }
 
-.offset-up {
+.registration-container {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+@media (max-width: 1024px) {
+    .registration-container {
+        width: 90%;
+        border: none;
+        margin-top: 0;
+    }
+}
+
+.help-class {
     position: relative;
-    bottom: 100px;
+    top: 5px;
 }
 
-.inner-box {
-    width: 600px;
-    height: 600px;
+@media (max-width: 1000px) {
+    .help-class {
+        position: relative;
+        top: -35px;
+    }
+    .password-confirmation {
+        position: relative;
+        top: -30px;
+    }
+    .nickname-class {
+        position: relative;
+        top: -20px;
+    }
+    .registration-button {
+        width: 95%;
+    }
+    .date-birth-class {
+        position: relative;
+        top: -30px;
+    }
 }
-
-.registration-title {
-    margin-top: 40px;
-}
+ 
