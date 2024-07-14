@@ -1,6 +1,11 @@
 @import "authButton.css";
 @import "additional_style.css";
 
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
 .my-logo {
     font-family: "Roboto", sans-serif;
     font-size: 28px;
@@ -20,4 +25,6 @@
         display: none;
     }
 }
+
+
 

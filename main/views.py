@@ -13,8 +13,24 @@ def index(request):
     return render(request, "main/index.html", context=data)
 
 
+def write_article(request):
+    data = {
+        "title": "Написать свою статью",
+    }
+
+    return render(request, "main/write_article.html", context=data)
+
+
 def about(request):
     return render(request, "main/about.html")
+
+
+def login(request):
+    data = {
+        "title": "Авторизация",
+    }
+
+    return render(request, "main/login.html", context=data)
 
 
 def registration(request):

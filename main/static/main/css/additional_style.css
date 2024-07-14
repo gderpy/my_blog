@@ -44,5 +44,8 @@
         position: relative;
         top: -30px;
     }
+    .card {
+        margin: 15px 0 15px 0;
+    }
 }
  
