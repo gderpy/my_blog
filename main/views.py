@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from .forms import AddPostForm
 
 # Create your views here.
 
@@ -14,8 +15,17 @@ def index(request):
 
 
 def write_article(request):
+    if request.method == "POST":
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+    else:
+        form = AddPostForm()
+
     data = {
         "title": "Написать свою статью",
+        "form": form,
     }
 
     return render(request, "main/write_article.html", context=data)

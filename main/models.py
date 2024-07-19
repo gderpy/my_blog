@@ -16,7 +16,7 @@ class Article(models.Model):
     content = models.TextField()
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField()
+    is_published = models.BooleanField(default=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE)
 
     def __str__(self):
