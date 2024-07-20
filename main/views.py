@@ -4,12 +4,17 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .forms import AddPostForm
+from .models import Article
 
 # Create your views here.
 
 def index(request):
+
+    articles = Article.objects.all()
+
     data = {
         "title": "Главная страница",
+        "articles": articles,
     }
     return render(request, "main/index.html", context=data)
 

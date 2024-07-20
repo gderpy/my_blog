@@ -2,4 +2,39 @@
 
 {% block content %}
 
+{% for article in articles %}
+    <div class="container mt-5 mb-5">
+        <div class="row border border border-sm-black rounded gy-3">
+            <div class="col-12 d-flex gap-2">
+                <div class="avatar"><i class="fa-solid fa-user-ninja"></i></div>
+                <div class="article-author">Darry Poster</div>
+                <div class="time-ago">29 минут назад</div>
+            </div>
+            <div class="col-12">
+                <div class="article-title h2">{{ article.title }}</div>
+            </div>
+            <div class="col-12">
+                <div class="d-inline-block category"><i class="border border-black border-1 p-1 rounded" ,
+                        style="font-size: 15px">{{ article.category }}</i></div>
+            </div>
+            <div class="col-12">
+                <div class="article-content">{{ article.content|linebreaks }}</div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="feedback d-flex gap-3">
+                    <div class="likes">
+                        <i class="fa-solid fa-heart"></i>
+                        2
+                    </div>
+                    <div class="favorites">
+                        <i class="fa-solid fa-bookmark"></i>
+                        1
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<div class="offset-bottom"></div>
+
 {% endblock %}
