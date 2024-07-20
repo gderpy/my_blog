@@ -11,8 +11,9 @@ def get_categories():
 
 
 @register.inclusion_tag("main/list_categories.html")
-def show_categories(ul_class):
+def show_categories(ul_class, cat_selected=0):
     return {
         "categories": Category.objects.all(),
-        "ul_class": ul_class
+        "ul_class": ul_class,
+        "cat_selected": cat_selected
         }

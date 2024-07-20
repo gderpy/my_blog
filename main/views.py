@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .forms import AddPostForm
-from .models import Article
+from .models import Article, Category
 
 # Create your views here.
 
@@ -15,6 +15,7 @@ def index(request):
     data = {
         "title": "Главная страница",
         "articles": articles,
+        "cat_selected": 0,
     }
     return render(request, "main/index.html", context=data)
 
@@ -53,7 +54,11 @@ def registration(request):
 
 
 def show_category(request, slug_name):
-    return index(request)
+    data = {
+        "title": f"Категория: {Category.objects.get(slug=slug_name).name}",
+        "cat_selected": Category.objects.get(slug=slug_name).pk
+    }
+    return render(request, "main/index.html", context=data)
 
 
 def page_not_found(request, exception):
