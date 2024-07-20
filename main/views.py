@@ -52,6 +52,10 @@ def registration(request):
     return render(request, "main/registration.html")
 
 
+def show_category(request, slug_name):
+    return index(request)
+
+
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
 
