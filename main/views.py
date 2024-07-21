@@ -61,6 +61,17 @@ def show_category(request, slug_name):
     return render(request, "main/index.html", context=data)
 
 
+def show_article(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+
+    data = {
+        "title": article.title,
+        "article": article,
+    }
+
+    return render(request, "main/article.html", context=data)
+
+
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
 
