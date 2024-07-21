@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 # Create your models here.
 
@@ -24,6 +25,9 @@ class Article(models.Model):
         indexes = [
             models.Index(fields=["-time_create"])
         ]
+
+    def get_absolute_url(self):
+        return reverse("show_article", kwargs={"article_id": self.pk})
 
     def __str__(self):
         return self.title
