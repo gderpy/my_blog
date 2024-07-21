@@ -12,8 +12,8 @@
 </head>
 <body style="height: 100%; margin: 0;">
     
-    <header style="position: relative;">
-        <div class="first-header">
+    <div style="position: relative;" class="header">
+        <div class="first-header sticky-sm-top sticky-top">
             <div class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
                     <a class="navbar-brand my-logo" href="{% url 'home' %}">Blog.</a>
@@ -34,10 +34,9 @@
                 </div>
             </div>
         </div>
-    </header>
-
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

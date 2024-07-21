@@ -10,7 +10,7 @@ from .models import Article, Category
 
 def index(request):
 
-    articles = Article.objects.all()
+    articles = Article.published.all()
 
     data = {
         "title": "Главная страница",
