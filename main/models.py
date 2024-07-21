@@ -19,6 +19,12 @@ class Article(models.Model):
     is_published = models.BooleanField(default=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ["-time_create"]
+        indexes = [
+            models.Index(fields=["-time_create"])
+        ]
+
     def __str__(self):
         return self.title
 

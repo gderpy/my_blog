@@ -14,7 +14,7 @@
             <form method="POST">
                 {% csrf_token %}
                 {% for form_row in form %}
-                    <div class="col-sm-6 mt-4 h6">
+                    <div class="{% if form_row.name != 'content' %}col-sm-6{% else %}col-sm-12{% endif %} mt-4 h6">
                         {{ form_row.label_tag }}
                         {{ form_row }}
                     </div>
