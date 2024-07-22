@@ -8,7 +8,7 @@
             <div class="col-12 d-flex gap-2">
                 <div class="avatar"><i class="fa-solid fa-user-ninja"></i></div>
                 <div class="article-author">Darry Poster</div>
-                <div class="time-ago">29 минут назад</div>
+                <div class="time-ago">{{ article.time_update|date:"d-m-Y H:i" }}</div>
             </div>
             <div class="col-12">
                 <div class="article-title h2">{{ article.title }}</div>

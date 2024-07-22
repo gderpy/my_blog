@@ -5,11 +5,14 @@ from django.urls import reverse
 # Create your models here.
 
 class Category(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, db_index=True, unique=True)
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("show_category", kwargs={"slug_name": self.slug})
 
 
 class PublishedManager(models.Manager):
@@ -28,7 +31,7 @@ class Article(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=Status.choices, default=Status.DRAFT) # type: ignore
-    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+    category = models.ForeignKey("Category", on_delete=models.PROTECT, related_name="articles")
 
     objects = models.Manager()
     published = PublishedManager()

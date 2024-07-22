@@ -54,9 +54,13 @@ def registration(request):
 
 
 def show_category(request, slug_name):
+    category = get_object_or_404(Category, slug=slug_name)
+    articles = Article.published.filter(category_id=category.pk)
+
     data = {
-        "title": f"Категория: {Category.objects.get(slug=slug_name).name}",
-        "cat_selected": Category.objects.get(slug=slug_name).pk
+        "title": f"Категория: {category.name}",
+        "articles": articles,
+        "cat_selected": category.pk
     }
     return render(request, "main/index.html", context=data)
 
