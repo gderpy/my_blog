@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .content-block {
+            display: none;
+        }
+    </style>
+    
+</head>
+<body>
+    <form>
+        <label>
+            <input type="radio" name="option" value="block1" onclick="showBlock('block1')">
+            Показать блок 1
+        </label>
+        <label>
+            <input type="radio" name="option" value="block2" onclick="showBlock('block2')">
+            Показать блок 2
+        </label>
+    </form>
+
+    <div id="block1" class="content-block">
+        <p>Это содержимое блока 1.</p>
+    </div>
+
+    <div id="block2" class="content-block">
+        <p>Это содержимое блока 2.</p>
+    </div>
+
+    <script>
+        function showBlock(blockId) {
+            // Скрываем все блоки
+            var blocks = document.querySelectorAll('.content-block');
+            blocks.forEach(function(block) {
+                block.style.display = 'none';
+            });
+
+            // Показываем выбранный блок
+            var selectedBlock = document.getElementById(blockId);
+            selectedBlock.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

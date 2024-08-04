@@ -14,11 +14,11 @@
                 <div class="article-title h2">{{ article.title }}</div>
             </div>
             <div class="col-12">
-                <div class="d-inline-block category"><i class="border border-black border-1 p-1 rounded" ,
-                        style="font-size: 15px">{{ article.category }}</i></div>
+                <div class="article-content">{{ article.content|linebreaks|truncatechars:250 }}</div>
             </div>
             <div class="col-12">
-                <div class="article-content">{{ article.content|linebreaks|truncatechars:250 }}</div>
+                <div class="d-inline-block category"><i class="border border-black border-1 p-1 rounded" ,
+                        style="font-size: 15px">{{ article.category }}</i></div>
             </div>
             <div class="col-12 mb-3 d-flex justify-content-between">
                 <div class="feedback d-flex gap-3 mt-3">

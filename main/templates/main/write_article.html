@@ -2,26 +2,45 @@
 
 {% block content %}
 
-    <div class="container mt-sm-5">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header h5">
-                        Создание статьи
-                    </div>
+<div class="container mt-sm-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header h5">
+                    Создание статьи
                 </div>
             </div>
-            <form method="POST">
-                {% csrf_token %}
-                {% for form_row in form %}
-                    <div class="{% if form_row.name != 'content' %}col-sm-6{% else %}col-sm-12{% endif %} mt-4 h6">
-                        {{ form_row.label_tag }}
-                        {{ form_row }}
-                    </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-dark mt-4">Опубликовать</button>
-            </form>            
         </div>
+        <form method="POST">
+            {% csrf_token %}
+            {% for form_row in form %}
+                <div class="{% if form_row.name not in 'content category' %}col-sm-6{% else %}col-sm-12{% endif %} mt-4 h6">
+                    {{ form_row.label_tag }}
+                    {% if form_row.name != "category" %}
+                        {{ form_row }}
+                    {% else %}
+                        <div class="card mt-2">
+                            <div class="card-body btn-group d-flex gap-3 col-sm-6" role="group" aria-label="Основные категории">
+                                {% for category in main_categories %}
+                                    {% if category.parent is None %}
+                                    <input type="radio" class="btn-check" name="btnradio" id="btncheck{{ forloop.counter }}" autocomplete="off" value="{{ category.id }}">
+                                    <label class="btn btn-outline-dark rounded" for="btncheck{{ forloop.counter }}">{{ category.name }}</label>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="mt-4" id="subcategories">
+                                <!-- Здесь будут находиться подкатегории -->
+                            </div>
+                            <div class="mt-4" id="selected-categories">
+                                <!-- Здесь будут отображаться выбранные категории -->
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-dark mt-4">Опубликовать</button>
+        </form>
     </div>
+</div>
 
 {% endblock %}

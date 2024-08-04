@@ -1,0 +1,9 @@
+{% for group in widget.optgroups %}
+    {% for option in group %}
+        <button type="button" class="category-button {% if option.selected %}selected{% endif %}">
+            <input type="checkbox" name="{{ widget.name }}" value="{{ option.value }}" 
+            id="{{ option.if_for_label }}" {% if option.selected %}checked{% endif %} hidden>
+            {{ option.label }}
+        </button>
+    {% endfor %}
+{% endfor %}
