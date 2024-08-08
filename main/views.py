@@ -32,7 +32,6 @@ def write_article(request):
     data = {
         "title": "Написать свою статью",
         "form": form,
-        "main_categories": Category.objects.filter(parent=None),
     }
 
     return render(request, "main/write_article.html", context=data)

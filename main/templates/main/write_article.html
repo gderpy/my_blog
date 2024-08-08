@@ -21,7 +21,7 @@
                     {% else %}
                         <div class="card mt-2">
                             <div class="card-body btn-group d-flex gap-3 col-sm-6" role="group" aria-label="Основные категории">
-                                {% for category in main_categories %}
+                                {% for category in form.fields.category.queryset %}
                                     <input type="radio" class="btn-check" name="category" id="btncheck{{ forloop.counter }}" autocomplete="off" value="{{ category.id }}">
                                     <label class="btn btn-outline-dark rounded" for="btncheck{{ forloop.counter }}">{{ category.name }}</label>
                                 {% endfor %}
