@@ -7,7 +7,6 @@ from django.urls import reverse
 class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, db_index=True, unique=True)
-    parent = models.ForeignKey("self", null=True, blank=True, related_name="subcategories", on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -19,7 +18,7 @@ class Article(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["-time_create"]

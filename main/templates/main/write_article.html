@@ -22,18 +22,10 @@
                         <div class="card mt-2">
                             <div class="card-body btn-group d-flex gap-3 col-sm-6" role="group" aria-label="Основные категории">
                                 {% for category in main_categories %}
-                                    {% if category.parent is None %}
-                                    <input type="radio" class="btn-check" name="btnradio" id="btncheck{{ forloop.counter }}" autocomplete="off" value="{{ category.id }}">
+                                    <input type="radio" class="btn-check" name="category" id="btncheck{{ forloop.counter }}" autocomplete="off" value="{{ category.id }}">
                                     <label class="btn btn-outline-dark rounded" for="btncheck{{ forloop.counter }}">{{ category.name }}</label>
-                                    {% endif %}
                                 {% endfor %}
-                            </div>
-                            <div class="mt-4" id="subcategories">
-                                <!-- Здесь будут находиться подкатегории -->
-                            </div>
-                            <div class="mt-4" id="selected-categories">
-                                <!-- Здесь будут отображаться выбранные категории -->
-                            </div>
+                            </div> 
                         </div>
                     {% endif %}
                 </div>

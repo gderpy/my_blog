@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .forms import AddPostForm, MyForm
+from .forms import AddPostForm
 from .models import Article, Category
 
 # Create your views here.
@@ -36,13 +36,6 @@ def write_article(request):
     }
 
     return render(request, "main/write_article.html", context=data)
-
-
-def load_subcategories(request):
-    category_id = request.GET.get("category_id")
-    subcategories = Category.objects.filter(parent_id=category_id)
-    return JsonResponse(list(subcategories.values("id", "name")), safe=False)
-
 
 def about(request):
     return render(request, "main/about.html")
@@ -77,17 +70,6 @@ def show_article(request, article_id):
     }
 
     return render(request, "main/article.html", context=data)
-
-
-def tests(request):
-    if request.method == "POST":
-        form = MyForm(request.POST)
-        if form.is_valid():
-            selected_choices = form.cleaned_data["choices"]
-            print(selected_choices)
-    else:
-        form = MyForm()
-    return render(request, "main/test.html", {"form": form})
 
 
 def page_not_found(request, exception):
