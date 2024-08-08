@@ -1,6 +1,5 @@
 <ul class="{{ ul_class }}">
     {% for category in categories %}
-
         {% if ul_class == "dropdown-menu" %}
             <li><a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
         {% endif %}

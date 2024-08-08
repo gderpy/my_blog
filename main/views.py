@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -32,10 +32,10 @@ def write_article(request):
     data = {
         "title": "Написать свою статью",
         "form": form,
+        "main_categories": Category.objects.filter(parent=None),
     }
 
     return render(request, "main/write_article.html", context=data)
-
 
 def about(request):
     return render(request, "main/about.html")
