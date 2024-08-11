@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import LoginUserForm
 
 # Create your views here.
@@ -26,4 +26,5 @@ def login_user(request):
 
 
 def logout_user(request):
-    return HttpResponse("Выход из профиля")
+    logout(request)
+    return HttpResponseRedirect(reverse("users:login"))
