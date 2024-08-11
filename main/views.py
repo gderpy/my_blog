@@ -26,7 +26,9 @@ def write_article(request):
     if request.method == "POST":
         form = AddPostForm(request.POST)
         if form.is_valid():
-            form.save()
+            article = form.save(commit=False)
+            article.author = request.user
+            article.save()
             return redirect("home")
     else:
         form = AddPostForm()
