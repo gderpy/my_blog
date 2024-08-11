@@ -27,8 +27,13 @@
                             <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
                         </ul>
                         <div class="d-flex gap-2 auth-btn">
+                            {% if user.is_authenticated %}
+                            <strong class="mt-1 fs-5">{{ user.username }}</strong>
+                            <a href="{% url 'users:logout' %}" class="btn btn-outline-dark ms-3">Выйти</a>
+                            {% else %}
                             <a href="{% url 'users:login' %}" class="btn btn-outline-light">Войти</a>
                             <a href="{% url 'users:logout' %}" class="btn btn-secondary">Регистрация</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

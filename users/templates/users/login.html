@@ -21,11 +21,14 @@
                                     <a href="#" class="nav-link">Уже есть аккаунт?</a>
                                 </div> -->
                                 <button type="submit" value="login" class="btn btn-dark mb-3">Авторизоваться</button>
-                                <div class="text-center mt-3 d-block d-lg-none">
+                                <!-- <div class="text-center mt-3 d-block d-lg-none">
                                     <button class="btn btn-dark mb-3">Авторизоваться</button>
                                     <a href="#" class="nav-link">Уже есть аккаунт?</a>
-                                </div>
+                                </div> -->
                             </form>
+                            {% if form.errors %}
+                                <span>Имя логина, либо пароль не совпадают</span>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

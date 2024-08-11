@@ -67,7 +67,10 @@
                     <div class="d-flex gap-2">
                         {% if user.is_authenticated %}
                             <strong class="mt-1 fs-5">{{ user.username }}</strong>
-                            <a href="{% url 'users:logout' %}" class="btn btn-outline-dark ms-3">Выйти</a>
+                            <form method="POST" action="{% url 'users:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-dark ms-3">Выйти</button>
+                            </form>
                         {% else %}
                             <a href="{% url 'users:login' %}" class="btn btn-outline-dark">Войти</a>
                             <a href="{% url 'users:logout' %}" class="btn btn-dark">Регистрация</a>

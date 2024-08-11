@@ -1,30 +1,42 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import LoginUserForm
 
 # Create your views here.
 
-def login_user(request):
-    if request.method == "POST":
-        form = LoginUserForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request, username=cd["username"], password=cd["password"])
+# def login_user(request):
+#     if request.method == "POST":
+#         form = LoginUserForm(request.POST)
+#         if form.is_valid():
+#             cd = form.cleaned_data
+#             user = authenticate(request, username=cd["username"], password=cd["password"])
 
-            if user and user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(reverse("home"))
+#             if user and user.is_active:
+#                 login(request, user)
+#                 return HttpResponseRedirect(reverse("home"))
     
-    else:
-        form = LoginUserForm()
+#     else:
+#         form = LoginUserForm()
 
-    data = {
-        "form": form,
+#     data = {
+#         "form": form,
+#     }
+#     return render(request, "users/login.html", context=data)
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = "users/login.html"
+    extra_context = {
+        "title": "Авторизация",
     }
-    return render(request, "users/login.html", context=data)
+
+    def get_success_url(self):
+        return reverse_lazy("home")
 
 
-def logout_user(request):
-    logout(request)
-    return HttpResponseRedirect(reverse("users:login"))
+# def logout_user(request):
+#     logout(request)
+#     return HttpResponseRedirect(reverse("users:login"))
