@@ -3,6 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import CreateView
 from .forms import LoginUserForm, RegisterUserForm
 
 
@@ -17,22 +18,39 @@ class LoginUser(LoginView):
         return reverse_lazy("home")
     
 
-def register(request):
-    if request.method == "POST":
-        form = RegisterUserForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data["password1"])
-            user.save()
-            return render(request, "users/register_done.html")
-    else:      
-        form = RegisterUserForm()
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    template_name = "users/registration.html"
+    extra_context = {"title": "Регистрация"}
+    success_url = reverse_lazy("users:login")
 
-    data = {
-        "form": form,
-    }
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data["password1"])
+        user.save()
+        return render(self.request, "users/register_done.html", {"user": user})
     
-    return render(request, "users/registration.html", context=data)
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid(form)
+    
+
+# def register(request):
+#     if request.method == "POST":
+#         form = RegisterUserForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.set_password(form.cleaned_data["password1"])
+#             user.save()
+#             return render(request, "users/register_done.html")
+#     else:      
+#         form = RegisterUserForm()
+
+#     data = {
+#         "form": form,
+#     }
+    
+#     return render(request, "users/registration.html", context=data)
 
 
 

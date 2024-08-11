@@ -17,21 +17,15 @@
                                 <div class="col-lg-6">
                                     {{ form.first_name.label_tag }}
                                     {{ form.first_name }}
-                                    <!-- <label for="inputFirstName" class="form-label">Имя</label>
-                                    <input type="text" class="form-control" id="inputFirstName"> -->
                                 </div>
                                 <div class="col-lg-6">
                                     {{ form.last_name.label_tag }}
                                     {{ form.last_name }}
-                                    <!-- <label for="inputLastName" class="form-label">Фамилия</label>
-                                    <input type="text" class="form-control" id="inputLastName"> -->
                                 </div>
                         
                                 <div class="col-lg-6">
                                     {{ form.email.label_tag }}
                                     {{ form.email }}
-                                    <!-- <label for="inputEmail4" class="form-label">E-mail</label>
-                                    <input type="email" class="form-control" id="inputEmail4"> -->
                                 </div>
                                 <div class="col-lg-6">
                                     <span>{{ form.sex.label }}</span>
@@ -48,8 +42,6 @@
                                 <div class="col-lg-6">
                                     {{ form.password1.label_tag }}
                                     {{ form.password1 }}
-                                    <!-- <label for="inputPassword4" class="form-label">Пароль</label>
-                                    <input type="password" class="form-control" id="inputPassword4" aria-describedby="passwordHelpInline"> -->
                                 </div>
                                 <div class="help-class col-lg-6 mt-5">
                                     <span id="passwordHelpInline" class="form-text fs-6">Должно быть 8-20 символов</span>
@@ -57,20 +49,14 @@
                                 <div class="password-confirmation col-lg-6">
                                     {{ form.password2.label_tag }}
                                     {{ form.password2 }}
-                                    <!-- <label for="confirmPassword" class="form-label">Подтвердите пароль</label>
-                                    <input type="password" class="form-control" id="confirmPassword"> -->
                                 </div>
                                 <div class="date-birth-class col-lg-6">
                                     {{ form.birthdate.label_tag }}
                                     {{ form.birthdate }}
-                                    <!-- <label for="birthDate" class="form-label">Дата рождения</label>
-                                    <input type="date" class="form-control" id="birthDate" name="birthDate"> -->
                                 </div>
                                 <div class="nickname-class col-lg-12">
                                     {{ form.username.label_tag }}
                                     {{ form.username }}
-                                    <!-- <label for="inputNickname" class="form-label">Никнейм на сайте</label>
-                                    <input type="text" class="form-control" id="inputNickname"> -->
                                 </div>
                                 <div class="mt-3 d-none d-lg-block">
                                     <button type="submit" class="btn btn-dark mb-3">Зарегистрироваться</button>
@@ -79,6 +65,11 @@
                                     <button type="submit" class="btn btn-dark mb-3">Зарегистрироваться</button>
                                 </div>
                             </form>
+                            {% if form.errors %}
+                                {% for field, errors in form.errors.items %}
+                                    {{ errors }}
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
