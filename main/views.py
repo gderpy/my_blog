@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from .forms import AddPostForm
 from .models import Article, Category
 
@@ -20,6 +21,7 @@ def index(request):
     return render(request, "main/index.html", context=data)
 
 
+@login_required
 def write_article(request):
     if request.method == "POST":
         form = AddPostForm(request.POST)
