@@ -36,20 +36,9 @@ def write_article(request):
 
     return render(request, "main/write_article.html", context=data)
 
+
 def about(request):
     return render(request, "main/about.html")
-
-
-def login(request):
-    data = {
-        "title": "Авторизация",
-    }
-
-    return render(request, "main/login.html", context=data)
-
-
-def registration(request):
-    return render(request, "main/registration.html")
 
 
 def show_category(request, slug_name):
