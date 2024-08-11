@@ -14,17 +14,7 @@
                                 {% for form_row in form %}
                                     {{ form_row }}
                                 {% endfor %}
-                                <!-- <input type="text" class="form-control my-4 py-2" placeholder="Логин">
-                                <input type="text" name="" id="" class="form-control my-4 py-2" placeholder="Пароль"> -->
-                                <!-- <div class="mt-3 d-none d-lg-block">
-                                    <button type="submit" value="login" class="btn btn-dark mb-3">Авторизоваться</button>
-                                    <a href="#" class="nav-link">Уже есть аккаунт?</a>
-                                </div> -->
                                 <button type="submit" value="login" class="btn btn-dark mb-3">Авторизоваться</button>
-                                <!-- <div class="text-center mt-3 d-block d-lg-none">
-                                    <button class="btn btn-dark mb-3">Авторизоваться</button>
-                                    <a href="#" class="nav-link">Уже есть аккаунт?</a>
-                                </div> -->
                             </form>
                             {% if form.errors %}
                                 <span>Имя логина, либо пароль не совпадают</span>

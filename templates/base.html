@@ -48,7 +48,7 @@
                         </form>
                         <div class="auth-btn">
                             <a href="{% url 'users:login' %}" class="text-white text-decoration-none px-3 py-1 rounded-2">Войти</a>
-                            <a href="{% url 'users:logout' %}" class="text-black text-decoration-none px-3 py-1 rounded-2" 
+                            <a href="{% url 'users:registration' %}" class="text-black text-decoration-none px-3 py-1 rounded-2" 
                         style="background-color: white">Регистрация</a>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             </form>
                         {% else %}
                             <a href="{% url 'users:login' %}" class="btn btn-outline-dark">Войти</a>
-                            <a href="{% url 'users:logout' %}" class="btn btn-dark">Регистрация</a>
+                            <a href="{% url 'users:registration' %}" class="btn btn-dark">Регистрация</a>
                         {% endif %}
                     </div>
                 </div>
