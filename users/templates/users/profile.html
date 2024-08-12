@@ -1,0 +1,20 @@
+{% extends 'base_2.html' %}
+
+{% block content %}
+   
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                Ваш профиль
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ selected_fields.username }}</h5>
+                <br>
+                <p class="card-text"><strong>Имя:</strong> {{ selected_fields.first_name }}</p>
+                <p class="card-text"><strong>Фамилия:</strong> {{ selected_fields.last_name }}</p>
+                <p class="card-text"><strong>Электронная почта:</strong> {{ selected_fields.email }}</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
