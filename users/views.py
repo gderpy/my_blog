@@ -5,9 +5,10 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import LoginUserForm, RegisterUserForm, EditProfileUserForm
+from .forms import LoginUserForm, RegisterUserForm, MainUserForm, AddUserForm
 from .models import UserProfile
 
 
@@ -59,18 +60,41 @@ class UserProfileView(LoginRequiredMixin, DetailView):
         user_profile = UserProfile.objects.get(user=self.object) # type: ignore
         context["user_profile"] = user_profile
         return context
+    
 
-
-class EditUserProfileView(LoginRequiredMixin, UpdateView):
-    model = get_user_model()
-    form_class = EditProfileUserForm
-    template_name = "users/profile_edit.html"
-    extra_context = {
-        "title": "Редактирование профиля",
-    }
+class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User 
+    form_class = MainUserForm
+    template_name = "users/edit_profile.html"
 
     def get_success_url(self):
-        return reverse_lazy("users:edit_profile", args=[self.request.user.pk])
+        return reverse_lazy("users:profile", kwargs={"pk": self.object.pk})
+
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context["profile_form"] = AddUserForm(self.request.POST, instance=self.request.user.userprofile) # type: ignore
+        else:
+            context["profile_form"] = AddUserForm(instance=self.request.user.userprofile) # type: ignore
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        profile_form = context["profile_form"] # type: ignore
+        if form.is_valid() and profile_form.is_valid():
+            self.object = form.save()
+            profile_form.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+
+
+        
+
 
 
 

@@ -2,6 +2,7 @@ from typing import Any
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from .models import UserProfile
 
 
@@ -83,16 +84,37 @@ class RegisterUserForm(UserCreationForm):
         return email
     
 
-class EditProfileUserForm(forms.ModelForm):
-    
-    # Поля из модели User
-    username = forms.CharField(
-        disabled=True, 
-        label="Никнейм на сайте", 
-        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'inputNickname'}))
+class MainUserForm(forms.ModelForm):
 
     class Meta:
-        model = get_user_model()
+        model = User
+        fields = ["username", "first_name", "last_name", "email"]
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if User.objects.filter(username=username).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError("Такой никнейм уже занят")
+        return username
+    
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError("Такой E-mail уже занят")
+        return email
+    
+
+class AddUserForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ["sex", "birthdate"]
+    
+
+
+
+
+
+    
 
 
 

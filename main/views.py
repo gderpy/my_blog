@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 from .forms import AddPostForm
 from .models import Article, Category
 
@@ -70,4 +71,8 @@ def show_article(request, article_id):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+
+
+class TestPage(TemplateView):
+    template_name = "main/test.html"
 
