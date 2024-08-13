@@ -7,7 +7,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import LoginUserForm, RegisterUserForm, ProfileUserForm
+from .forms import LoginUserForm, RegisterUserForm, EditProfileUserForm
 from .models import UserProfile
 
 
@@ -41,7 +41,7 @@ class RegisterUser(CreateView):
                 "birthdate": form.cleaned_data.get("birthdate")
             }
         )
-        
+
         return render(self.request, "users/register_done.html", {"user": user})
     
     def form_invalid(self, form):
@@ -52,25 +52,26 @@ class RegisterUser(CreateView):
 class UserProfileView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = "users/profile.html"
-    context_object_name = "user_profile"
-
-    def get_object(self):
-        return self.request.user
+    context_object_name = "user"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.get_object()
-
-        selected_fields = {
-            "username": user.username, # type: ignore
-            "first_name": user.first_name, # type: ignore
-            "last_name": user.last_name, # type: ignore
-            "email": user.email, # type: ignore
-        }
-
-        context["selected_fields"] = selected_fields
-
+        user_profile = UserProfile.objects.get(user=self.object) # type: ignore
+        context["user_profile"] = user_profile
         return context
+
+
+class EditUserProfileView(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    form_class = EditProfileUserForm
+    template_name = "users/profile_edit.html"
+    extra_context = {
+        "title": "Редактирование профиля",
+    }
+
+    def get_success_url(self):
+        return reverse_lazy("users:edit_profile", args=[self.request.user.pk])
+
 
 
 

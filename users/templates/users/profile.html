@@ -8,11 +8,14 @@
                 Ваш профиль
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ selected_fields.username }}</h5>
+                <h5 class="card-title">{{ user.username }}</h5>
                 <br>
-                <p class="card-text"><strong>Имя:</strong> {{ selected_fields.first_name }}</p>
-                <p class="card-text"><strong>Фамилия:</strong> {{ selected_fields.last_name }}</p>
-                <p class="card-text"><strong>Электронная почта:</strong> {{ selected_fields.email }}</p>
+                <p class="card-text"><strong>Имя:</strong> {{ user.first_name }}</p>
+                <p class="card-text"><strong>Фамилия:</strong> {{ user.last_name }}</p>
+                <p class="card-text"><strong>Электронная почта:</strong> {{ user.email }}</p>
+                <p class="card-text"><strong>Дата рождения:</strong> {{ user_profile.birthdate }}</p>
+                <p class="card-text"><strong>Пол:</strong> {{ user_profile.get_sex_display }}</p>
+                <div class="text-end"><a href="{% url 'edit_profile' pk=user.pk %}" class="btn btn-dark">Редактировать профиль</a></div>
             </div>
         </div>
     </div>

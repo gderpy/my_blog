@@ -1,4 +1,5 @@
 from django.urls import path, re_path, register_converter, include
+from django.views.generic import TemplateView
 from . import views 
 
 

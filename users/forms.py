@@ -83,25 +83,21 @@ class RegisterUserForm(UserCreationForm):
         return email
     
 
-class ProfileUserForm(forms.ModelForm):
-    username = forms.CharField(disabled=True, 
-                                label="Никнейм на сайте", 
-                                widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'inputNickname'}))
-    email = forms.EmailField(disabled=True,
-                                label="E-mail",
-                                widget=forms.EmailInput(attrs={"class": "form-control", "id": "inputEmail4"}))
+class EditProfileUserForm(forms.ModelForm):
     
+    # Поля из модели User
+    username = forms.CharField(
+        disabled=True, 
+        label="Никнейм на сайте", 
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'inputNickname'}))
+
     class Meta:
         model = get_user_model()
-        fields = ["username", "first_name", "last_name", "email"]
-        labels = {
-            "first_name": "Имя",
-            "last_name": "Фамилия",
-        }
-        widgets = {
-            "first_name": forms.TextInput(attrs={"class": "form-control", "id": "inputFirstName"}),
-            "last_name": forms.TextInput(attrs={"class": "form-control", "id": "inputLastName"}),
-        }
+
+
+
+
+
     
 
     
