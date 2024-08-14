@@ -89,6 +89,13 @@ class MainUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["username", "first_name", "last_name", "email"]
+        labels = {"username": "Никнейм на сайте"}
+        widgets = {
+            "username": forms.TextInput(attrs={"class": "form-control", "id": "editUsername"}),
+            "first_name": forms.TextInput(attrs={"class": "form-control", "id": "editFirstName"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control", "id": "editLastName"}),
+            "email": forms.TextInput(attrs={"class": "form-control", "id": "editEmail"})
+        }
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
@@ -104,6 +111,11 @@ class MainUserForm(forms.ModelForm):
     
 
 class AddUserForm(forms.ModelForm):
+
+    sex = forms.ChoiceField(choices=UserProfile.SEX_CHOICES[0:2], 
+                            widget=forms.RadioSelect,
+                            label="Пол")
+    birthdate = forms.DateField(label="Дата рождения", widget=forms.DateInput(attrs={"class": "form-control"}))
 
     class Meta:
         model = UserProfile
