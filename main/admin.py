@@ -29,9 +29,6 @@ class ArticleAdmin(admin.ModelAdmin):
         self.message_user(request, f"Снято с публикации {count} записей.", messages.WARNING)
 
 
-# admin.site.register(Article, ArticleAdmin)
-
-
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")

@@ -57,8 +57,9 @@ class UserProfileView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_profile = UserProfile.objects.get(user=self.object) # type: ignore
-        context["user_profile"] = user_profile
+        user_profile_exists = UserProfile.objects.filter(user=self.object).exists() # type: ignore
+        if user_profile_exists:
+            context["user_profile"] = UserProfile.objects.get(user=self.object) # type: ignore
         return context
     
 

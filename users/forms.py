@@ -19,11 +19,6 @@ class LoginUserForm(AuthenticationForm):
 
 class RegisterUserForm(UserCreationForm):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        print(f"Password1 виджет: {self.fields['password1'].widget}")
-        print(f"Password1 виджет: {self.fields['password2'].widget}")
-
     first_name = forms.CharField(
         max_length=50,
         required=True, 
@@ -60,7 +55,7 @@ class RegisterUserForm(UserCreationForm):
     )
 
     birthdate = forms.DateField(
-        required=False,
+        required=True,
         widget=forms.DateInput(attrs={'class': 'form-control', 'id': 'birthDate', 'type': 'date'}),
         label="Дата рождения"
     )
