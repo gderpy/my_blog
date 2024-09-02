@@ -37,7 +37,7 @@ class Article(models.Model):
     time_update = models.DateTimeField(auto_now=True, verbose_name="Дата последнего обновления")
     is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), default=Status.DRAFT, verbose_name="Публикация") # type: ignore
     category = models.ForeignKey("Category", on_delete=models.PROTECT, related_name="articles", verbose_name="Категория")
-    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name="articles", null=True, default=None)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="articles")
 
     objects = models.Manager()
     published = PublishedManager()

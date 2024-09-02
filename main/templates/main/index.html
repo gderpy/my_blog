@@ -7,7 +7,7 @@
         <div class="row border border border-sm-black rounded gy-3">
             <div class="col-12 d-flex gap-2">
                 <div class="avatar"><i class="fa-solid fa-user-ninja"></i></div>
-                <div class="article-author">{{ article.author.username|default:"Аноним" }}</div>
+                <div class="article-author">{{ article.author.username }}</div>
                 <div class="time-ago">{{ article.time_update|date:"d-m-Y H:i" }}</div>
             </div>
             <div class="col-12">
