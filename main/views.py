@@ -1,10 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
-from django.template.loader import render_to_string
+from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
 from .forms import AddPostForm
 from .models import Article, Category
 
@@ -30,7 +26,7 @@ def write_article(request):
             article = form.save(commit=False)
             article.author = request.user
             article.save()
-            return redirect("home")
+            return render(request, "main/article_moderation.html")
     else:
         form = AddPostForm()
 

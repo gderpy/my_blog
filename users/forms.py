@@ -39,7 +39,7 @@ class RegisterUserForm(UserCreationForm):
 
     sex = forms.ChoiceField(
         choices=UserProfile.SEX_CHOICES[0:2],
-        required=False,
+        required=True,
         label="Пол",
         widget=forms.RadioSelect(attrs={"class": "form-check-input"})
     )
@@ -110,7 +110,8 @@ class AddUserForm(forms.ModelForm):
     sex = forms.ChoiceField(choices=UserProfile.SEX_CHOICES[0:2], 
                             widget=forms.RadioSelect,
                             label="Пол")
-    birthdate = forms.DateField(label="Дата рождения", widget=forms.DateInput(attrs={"class": "form-control"}))
+    birthdate = forms.DateField(label="Дата рождения", widget=forms.DateInput(attrs={"class": "form-control",
+                                                                                     "type": "date"}))
 
     class Meta:
         model = UserProfile
