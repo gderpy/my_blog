@@ -1,0 +1,23 @@
+{% load static %}
+
+<div>
+    <div class="likes d-flex gap-1">
+        {% if user.is_authenticated %}
+            <a 
+            hx-get="{% url 'like_article' article.id %}"
+            hx-target="closest div"
+            hx-swap="outerHTML"
+            style="cursor: pointer">
+                {% if user in article.likes.all %}
+                    <i class="bi bi-heart-fill text-dark"></i>
+                {% else %}
+                    <i class="bi bi-heart text-dark"></i>
+                {% endif %}
+            </a>
+        {% else %}
+            <a href="{% url 'users:login' %}"><i class="bi bi-heart text-dark"></i></a>
+        {% endif %}
+
+        {{ article.likes.count }}
+    </div>
+</div>

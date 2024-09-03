@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -38,6 +39,7 @@ class Article(models.Model):
     is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), default=Status.DRAFT, verbose_name="Публикация") # type: ignore
     category = models.ForeignKey("Category", on_delete=models.PROTECT, related_name="articles", verbose_name="Категория")
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="articles")
+    likes = models.ManyToManyField(User, related_name="liked_articles", through="LikedArticle")
 
     objects = models.Manager()
     published = PublishedManager()
@@ -55,6 +57,19 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class LikedArticle(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Статьи с лайком"
+        verbose_name_plural = "Статьи с лайком"
+
+    def __str__(self):
+        return f"{self.user.username}: {self.article.title}"
     
 
 

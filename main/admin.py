@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from .models import Article, Category
+from .models import Article, Category, LikedArticle
 
 
 @admin.register(Article)
@@ -33,3 +33,6 @@ class ArticleAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     list_display_links = ("id", "name")
+
+
+admin.site.register(LikedArticle)

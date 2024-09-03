@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import AddPostForm
@@ -9,6 +9,7 @@ from .models import Article, Category
 def index(request):
 
     articles = Article.published.all()
+
 
     data = {
         "title": "Главная страница",
@@ -63,6 +64,22 @@ def show_article(request, article_id):
     }
 
     return render(request, "main/article.html", context=data)
+
+
+def like_article(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    user_exist = article.likes.filter(username=request.user.username).exists()
+
+    if user_exist:
+        article.likes.remove(request.user)
+    else:
+        article.likes.add(request.user)
+
+    data = {
+        "article": article
+    }
+
+    return render(request, "main/snippets/likes.html", context=data)
 
 
 def page_not_found(request, exception):
