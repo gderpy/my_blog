@@ -1,0 +1,50 @@
+[
+{
+    "model": "main.category",
+    "pk": 1,
+    "fields": {
+        "name": "Разработка",
+        "slug": "razrabotka"
+    }
+},
+{
+    "model": "main.category",
+    "pk": 2,
+    "fields": {
+        "name": "Администрирование",
+        "slug": "administrirovanie"
+    }
+},
+{
+    "model": "main.category",
+    "pk": 3,
+    "fields": {
+        "name": "Дизайн",
+        "slug": "dizain"
+    }
+},
+{
+    "model": "main.category",
+    "pk": 4,
+    "fields": {
+        "name": "Менеджмент",
+        "slug": "menedzhment"
+    }
+},
+{
+    "model": "main.category",
+    "pk": 5,
+    "fields": {
+        "name": "Маркетинг",
+        "slug": "marketing"
+    }
+},
+{
+    "model": "main.category",
+    "pk": 6,
+    "fields": {
+        "name": "Научпоп",
+        "slug": "nauchpop"
+    }
+}
+]

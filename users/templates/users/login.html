@@ -1,0 +1,29 @@
+{% extends "base_2.html" %}
+
+{% block content %}
+    
+    <section>
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-12 col-sm-8 col-md-6 m-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="fs-3" style="font-weight: 500;">Авторизация</span>
+                            <form method="POST">
+                                {% csrf_token %}
+                                {% for form_row in form %}
+                                    {{ form_row }}
+                                {% endfor %}
+                                <button type="submit" value="login" class="btn btn-dark mb-3">Авторизоваться</button>
+                            </form>
+                            {% if form.errors %}
+                                <span>Имя логина, либо пароль не совпадают</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+{% endblock %}
