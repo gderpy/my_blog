@@ -40,6 +40,7 @@ class Article(models.Model):
     category = models.ForeignKey("Category", on_delete=models.PROTECT, related_name="articles", verbose_name="Категория")
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="articles")
     likes = models.ManyToManyField(User, related_name="liked_articles", through="LikedArticle")
+    favorites = models.ManyToManyField(User, related_name="favorite_article", through="FavoriteArticle", through_fields=("article", "user"))
 
     objects = models.Manager()
     published = PublishedManager()
@@ -67,6 +68,19 @@ class LikedArticle(models.Model):
     class Meta:
         verbose_name = "Статьи с лайком"
         verbose_name_plural = "Статьи с лайком"
+
+    def __str__(self):
+        return f"{self.user.username}: {self.article.title}"
+    
+
+class FavoriteArticle(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Статьи добавленные в избранное"
+        verbose_name_plural = "Статьи добавленные в избранное"
 
     def __str__(self):
         return f"{self.user.username}: {self.article.title}"

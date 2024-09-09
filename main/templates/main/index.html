@@ -22,11 +22,10 @@
             </div>
             <div class="col-12 mb-3 d-flex justify-content-between">
                 <div class="feedback d-flex gap-3 mt-3">
+                    
                     {% include 'main/snippets/likes.html' %}
-                    <div class="favorites">
-                        <i class="fa-solid fa-bookmark"></i>
-                        1
-                    </div>
+                    {% include 'main/snippets/favorites.html' %}
+                   
                 </div>
                 <div>
                     <a href="{{ article.get_absolute_url }}" class="btn btn-dark">Читать полностью</a>
