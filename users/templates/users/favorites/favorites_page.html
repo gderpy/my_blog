@@ -1,0 +1,16 @@
+{% extends "base_2.html" %}
+
+{% block content %}
+    
+    <div class="container mt-5">
+        {% for article in favorites %}
+            <div class="row card my-3">
+                <div class="col-12 card-body">
+                    <h5 class="card-title mb-3">{{ article.title }}</h5>
+                    <a href="{{ article.get_absolute_url }}" class="btn btn-outline-dark btn-sm">Читать статью</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

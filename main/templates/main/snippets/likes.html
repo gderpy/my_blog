@@ -4,7 +4,7 @@
     <div class="likes d-flex gap-1">
         {% if user.is_authenticated %}
             <a 
-            hx-get="{% url 'like_article' article.id %}"
+            hx-get="{% url 'toggle_article_action' article.id 'like' %}"
             hx-target="closest div"
             hx-swap="outerHTML"
             style="cursor: pointer">
@@ -21,3 +21,4 @@
         {{ article.likes.count }}
     </div>
 </div>
+

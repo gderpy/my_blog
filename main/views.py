@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound, HttpResponse
+from django.http import HttpResponseNotFound, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import AddPostForm
@@ -66,20 +66,31 @@ def show_article(request, article_id):
     return render(request, "main/article.html", context=data)
 
 
-def like_article(request, article_id):
+def toggle_article_action(request, article_id, action_type):
     article = get_object_or_404(Article, pk=article_id)
-    user_exist = article.likes.filter(username=request.user.username).exists()
+
+    if action_type == "like":
+        queryset = article.likes
+        template = "main/snippets/likes.html"
+    elif action_type == "favorite":
+        queryset = article.favorites
+        template = "main/snippets/favorites.html"
+    else:
+        return JsonResponse({"error": "Неверное действие"}, status=400)
+    
+    user_exist = queryset.filter(username=request.user.username).exists()
 
     if user_exist:
-        article.likes.remove(request.user)
+        queryset.remove(request.user)
     else:
-        article.likes.add(request.user)
+        queryset.add(request.user)
 
     data = {
-        "article": article
+        "article": article,
+        "action_type": action_type
     }
 
-    return render(request, "main/snippets/likes.html", context=data)
+    return render(request, template, context=data)
 
 
 def page_not_found(request, exception):
