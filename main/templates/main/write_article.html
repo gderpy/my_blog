@@ -14,10 +14,14 @@
         <form method="POST">
             {% csrf_token %}
             {% for form_row in form %}
-                <div class="{% if form_row.name not in 'content category' %}col-sm-6{% else %}col-sm-12{% endif %} mt-4 h6">
+                <div class="{% if form_row.name not in 'content category' %}col-sm-6{% else %}col-sm-12{% endif %} mt-4 h6 trix-editor-container">
                     {{ form_row.label_tag }}
                     {% if form_row.name != "category" %}
                         {{ form_row }}
+                        {% if form_row.name == "content" %}
+                            <trix-editor input="id_content"></trix-editor>
+                            <div class="trix-placeholder">Введите текст...</div>
+                        {% endif %}
                     {% else %}
                         <div class="card mt-2">
                             <div class="card-body btn-group d-flex gap-3 col-sm-6" role="group" aria-label="Основные категории">
