@@ -21,3 +21,17 @@ class AddPostForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ("title", "content", "category")
+
+
+class TrixEditorWidget(forms.Textarea):
+    class Media:
+        css = {
+            "all": ("https://unpkg.com/trix@2.0.8/dist/trix.css",)
+        }
+        js = ("https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js",)
+
+
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        attrs = super().build_attrs(base_attrs, extra_attrs)
+        attrs.update({"class": "trix-content"})
+        return attrs

@@ -14,7 +14,9 @@
                 <div class="article-title h2">{{ article.title }}</div>
             </div>
             <div class="col-12">
-                <div class="article-content">{{ article.content|safe|linebreaks|truncatechars:250 }}</div>
+                <div class="article-content">
+                    <p>{{ article.content|safe|linebreaks|truncatechars:250 }}</p>
+                </div>
             </div>
             <div class="col-12">
                 <div class="d-inline-block category"><i class="border border-black border-1 p-1 rounded" ,
