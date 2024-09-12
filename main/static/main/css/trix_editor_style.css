@@ -1,0 +1,38 @@
+trix-editor {
+    height: 500px;
+    width: 100%;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 15px 15px;
+}
+
+.trix-editor-container {
+    position: relative;
+}
+
+.trix-placeholder {
+    position: absolute;
+    color: #aaa;
+    pointer-events: none;
+    left: 15px;
+    top: 75px;
+    font-size: 20px;
+    transition: opacity 0.2s;
+    z-index: 1;
+}
+
+.trix-editor:not(:empty) ~ .trix-placeholder {
+    opacity: 0;
+}
+
+.trix-editor:focus ~ .trix-placeholder {
+    opacity: 0;
+}
+
+#trix-toolbar-1 {
+    margin-top: 5px;
+}
+
+h1 {
+    font-size: 20px;
+} 

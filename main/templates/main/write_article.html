@@ -14,25 +14,29 @@
         <form method="POST">
             {% csrf_token %}
             {% for form_row in form %}
-                <div class="{% if form_row.name not in 'content category' %}col-sm-6{% else %}col-sm-12{% endif %} mt-4 h6">
+                <div class="{% if form_row.name not in 'content category' %}col-sm-6{% else %}col-sm-12{% endif %} mt-4 h6 trix-editor-container">
                     {{ form_row.label_tag }}
                     {% if form_row.name != "category" %}
+                        {% if form_row.name == "content" %}
+                            <div class="trix-placeholder">Введите текст...</div>
+                        {% endif %}
                         {{ form_row }}
                     {% else %}
-                        <div class="card mt-2">
-                            <div class="card-body btn-group d-flex gap-3 col-sm-6" role="group" aria-label="Основные категории">
-                                {% for category in form.fields.category.queryset %}
-                                    <input type="radio" class="btn-check" name="category" id="btncheck{{ forloop.counter }}" autocomplete="off" value="{{ category.id }}">
-                                    <label class="btn btn-outline-dark rounded" for="btncheck{{ forloop.counter }}">{{ category.name }}</label>
-                                {% endfor %}
-                            </div> 
-                        </div>
-                    {% endif %}
+                    <div class="card mt-2">
+                        <div class="card-body btn-group d-flex gap-3 col-sm-6" role="group" aria-label="Основные категории">
+                            {% for category in form.fields.category.queryset %}
+                                <input type="radio" class="btn-check" name="category" id="btncheck{{ forloop.counter }}" autocomplete="off" value="{{ category.id }}">
+                                <label class="btn btn-outline-dark rounded" for="btncheck{{ forloop.counter }}">{{ category.name }}</label>
+                            {% endfor %}
+                        </div> 
+                    </div>
+                {% endif %}
                 </div>
             {% endfor %}
             <button type="submit" class="btn btn-dark mt-4">Опубликовать</button>
         </form>
     </div>
 </div>
-
+<br>
+<br>
 {% endblock %}

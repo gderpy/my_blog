@@ -1,8 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
-from django.template.loader import render_to_string
+from django.http import HttpResponseNotFound, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from .forms import AddPostForm
 from .models import Article, Category
 
@@ -12,6 +10,7 @@ def index(request):
 
     articles = Article.published.all()
 
+
     data = {
         "title": "Главная страница",
         "articles": articles,
@@ -20,12 +19,15 @@ def index(request):
     return render(request, "main/index.html", context=data)
 
 
+@login_required
 def write_article(request):
     if request.method == "POST":
         form = AddPostForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("home")
+            article = form.save(commit=False)
+            article.author = request.user
+            article.save()
+            return render(request, "main/article_moderation.html")
     else:
         form = AddPostForm()
 
@@ -36,20 +38,9 @@ def write_article(request):
 
     return render(request, "main/write_article.html", context=data)
 
+
 def about(request):
     return render(request, "main/about.html")
-
-
-def login(request):
-    data = {
-        "title": "Авторизация",
-    }
-
-    return render(request, "main/login.html", context=data)
-
-
-def registration(request):
-    return render(request, "main/registration.html")
 
 
 def show_category(request, slug_name):
@@ -75,6 +66,35 @@ def show_article(request, article_id):
     return render(request, "main/article.html", context=data)
 
 
+def toggle_article_action(request, article_id, action_type):
+    article = get_object_or_404(Article, pk=article_id)
+
+    if action_type == "like":
+        queryset = article.likes
+        template = "main/snippets/likes.html"
+    elif action_type == "favorite":
+        queryset = article.favorites
+        template = "main/snippets/favorites.html"
+    else:
+        return JsonResponse({"error": "Неверное действие"}, status=400)
+    
+    user_exist = queryset.filter(username=request.user.username).exists()
+
+    if user_exist:
+        queryset.remove(request.user)
+    else:
+        queryset.add(request.user)
+
+    data = {
+        "article": article,
+        "action_type": action_type
+    }
+
+    return render(request, template, context=data)
+
+
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+
+
 

@@ -22,7 +22,9 @@ from main.views import page_not_found
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls'))
+    path('', include('main.urls')),
+    path('users/', include('users.urls', namespace='users')),
+    path('trix-editor/', include('trix_editor.urls')),
 ]
 
 handler404 = page_not_found

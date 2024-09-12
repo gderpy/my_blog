@@ -1,6 +1,6 @@
 @import "authButton.css";
 @import "additional_style.css";
-@import "write_article_style.css";
+@import "trix_editor_style.css";
 
 body, html {
     height: 100%;
@@ -31,6 +31,7 @@ body, html {
     height: 1rem;
     width: 100%;
 }
+
 
 
 

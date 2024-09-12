@@ -1,0 +1,32 @@
+{% extends 'base_2.html' %}
+
+{% block content %}
+   
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                Ваш профиль
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% if user.is_superuser%}
+                        {{ user.username}} (Администратор)
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                </h5>
+                <br>
+                <p class="card-text"><strong>Имя:</strong> {{ user.first_name }}</p>
+                <p class="card-text"><strong>Фамилия:</strong> {{ user.last_name }}</p>
+                <p class="card-text"><strong>Электронная почта:</strong> {{ user.email }}</p>
+                <p class="card-text"><strong>Дата рождения:</strong> {{ user_profile.birthdate }}</p>
+                <p class="card-text"><strong>Пол:</strong> {{ user_profile.get_sex_display }}</p>
+                <div class="d-flex flex-row-reverse gap-3">
+                    <a href="{% url 'users:edit_profile' %}" class="btn btn-dark">Редактировать профиль</a>
+                    <a href="{% url 'users:show_favorites' %}" class="btn btn-dark">Избранные статьи</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
