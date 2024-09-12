@@ -1,9 +1,11 @@
 from django.contrib import admin, messages
 from .models import Article, Category, LikedArticle, FavoriteArticle
+from .forms import AdminAddPostForm
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
+    form = AdminAddPostForm
     list_display = ("title", "time_create", "category", "is_published", "brief_info")
     list_display_links = ("title", )
     ordering = ["-time_create", "title"]

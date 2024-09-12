@@ -92,6 +92,20 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-trix-editor"
+version = "0.3"
+description = "Django App To Integrate Trix Editor"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django_trix_editor-0.3-py3-none-any.whl", hash = "sha256:ff67cee5ae48007c24af42e7954bb78d7359d2e9185a3b24ccac80919e386cea"},
+    {file = "django_trix_editor-0.3.tar.gz", hash = "sha256:daf8d89f8a0c40159152621629a65d081078818b0dc1840ef59bef4ad5f9a4f9"},
+]
+
+[package.dependencies]
+Django = ">=4.1"
+
+[[package]]
 name = "exceptiongroup"
 version = "1.2.2"
 description = "Backport of PEP 654 (exception groups)"
@@ -379,4 +393,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "9289a411691cf4f9fed9446afc655329c3cdd63d7d9ae10e941757410df80def"
+content-hash = "9ed9562d6a134df89712b5963972edf5e105d79d5dcf9e1a19b971c55598a46a"

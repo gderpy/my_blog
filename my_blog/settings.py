@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'main.apps.MainConfig',
     'users.apps.UsersConfig',
+    'trix_editor',
 ]
 
 MIDDLEWARE = [
